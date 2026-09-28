@@ -1,0 +1,41 @@
+$ curl -i $URL/health
+HTTP/2 200 
+content-type: application/json
+date: Mon, 28 Sep 2026 14:35:21 GMT
+server: railway-hikari
+x-railway-request-id: 7M2IYqNoRuKH0B-MpHNmDw
+content-length: 57
+x-hikari-trace: hkg1.hn7d
+x-railway-edge: hkg1
+
+{"status":"ok","service":"day12-agent","version":"1.0.0"}
+
+$ curl -i $URL/ready
+HTTP/2 200 
+content-type: application/json
+date: Mon, 28 Sep 2026 14:35:22 GMT
+server: railway-hikari
+x-railway-request-id: 0iPocKVRQhalhFip9o6EoQ
+content-length: 31
+x-hikari-trace: hkg1.aebn
+x-railway-edge: hkg1
+
+{"status":"ready","redis":true}
+
+$ /ask không key
+HTTP/2 401 
+content-type: application/json
+date: Mon, 28 Sep 2026 14:35:22 GMT
+server: railway-hikari
+x-railway-request-id: dJjCwzOQQx-SXHOH0_TJvA
+content-length: 39
+x-hikari-trace: hkg1.aebn
+x-railway-edge: hkg1
+
+{"detail":"invalid or missing API key"}
+
+$ /ask có key
+{"answer":"Câu hỏi hay. Deploy là gì thường được giải quyết bằng cách chuẩn hóa môi trường chạy: cùng một image chạy giống nhau ở laptop và trên cloud.","user_id":"sv-test","history_length":0,"cost_usd":2.145e-05,"tokens":{"in":3,"out":35}}
+
+$ rate limit 15 lần
+200 200 200 200 200 200 200 200 200 429 429 429 429 429 429 
